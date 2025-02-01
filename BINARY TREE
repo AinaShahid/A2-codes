@@ -1,0 +1,74 @@
+bt_size= 10
+#declaring a bt
+class Node:
+    def __init__(self):
+        self.left = -1
+        self.data = 0
+        self.right = -1
+
+BT=[Node() for i in range(bt_size)]
+free=0
+root= -1
+
+
+def initialise_bt():
+    global free
+    for i in range(bt_size - 1):
+        BT[i].right = i +1
+    BT[bt_size - 1].right = -1
+
+    for x in range(10):
+        BT[x].left= -1
+        BT[x].data = 0
+        BT[x].right = -1
+root=-1
+free=0
+null= -1
+
+def insert_node(item):
+     global free,root
+
+     if free == -1:
+        print("no space available")
+        return
+
+        Nfree = free
+        free=BT[free].right
+        BT[Nfree].left = -1
+        BT[Nfree].data = item
+        BT[Nfree].right = -1
+
+     if root == -1:
+        root = Nfree
+     else:
+        current = root
+        while current != -1:
+            previous = current
+            if item < BT[current].data:
+                isleft = True
+                current = BT[current].left
+            else:
+                isleft = False
+                current = BT[current].right
+
+
+
+            if  isleft == True:
+                BT[previous].left = Nfree
+            else:
+                 BT[previous].right = Nfree
+
+
+def print_tree(index):
+    if index == -1:
+        return
+    print_tree(BT[index].left)
+    print(BT[index].data)
+    print_tree(BT[index].right)
+
+# Example usage:
+initialise_bt()
+for y in range(bt_size):
+    item = int(input("Enter the number to add in binary tree: "))
+    insert_node(item)
+
