@@ -1,0 +1,47 @@
+9618/M/J/22
+PAPER 43
+
+
+
+
+
+class Balloon:
+    #DECLARE Health : INTEGER
+    #DECLARE Colour : STRING
+    #DECLARE DefenceItem : STRING
+    def __init__(self,ColourP,DefenceItemP):
+        self.__Health = 100
+        self.__Colour = ColourP
+        self.__DefenceItem = DefenceItemP
+
+    def GetDefenceItem(self):
+        return self.__DefenceItem
+
+    def ChangeHealth(self,Num):
+        self.__Health = self.__Health + Num
+
+
+
+    def CheckHealth(self):
+        if self.__Health <= 0 :
+            return True
+        else:
+            return False
+
+
+def Defend(BalloonObject):
+        Strength = int(input("Enter the strength of the opponent :  "))
+        BalloonObject.CheckHealth(-Strength)
+        print("The Defence Item of the balloon is : ", BalloonObject.GetDefenceItem() )
+        check = BalloonObject.CheckHealth()
+        if check == True:
+                print ("no health remaining")
+        else:
+                print("health remaining")
+        return BalloonObject
+
+
+DefenceItem1 = input("Enter a defence item: ")
+Colour = input("Enter a colour for the balloon: ")
+Balloon1 = Balloon(DefenceItem1,Colour)
+Balloon1 = Defend(Balloon1)
